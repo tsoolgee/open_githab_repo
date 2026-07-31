@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         פתח ריפו/פריסה כאתר מהריפו (עוקף .io חסום)
 // @namespace    tsoolgee
-// @version      1.2
+// @version      0.0.1
 // @description  כפתור בדף ריפו בגיטהאב, וגם בדפי github.io עצמם, שפותח את האתר טעון במלואו מהריפו (דרך raw.githack.com - Content-Type נכון) - בלי לגעת ב-github.io החסום. משתמש ב-GM_xmlhttpRequest כדי לעקוף CSP.
 // @match        https://github.com/*/*
 // @match        https://*.github.io/*
