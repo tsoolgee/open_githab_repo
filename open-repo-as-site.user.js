@@ -19,8 +19,8 @@
     // ==========================================
     const WHITELIST = [
         'cfopuser', 
-        'username2',
-        'some-organization'
+        'tsoolgee',
+        'beniabot'
     ];
     // ==========================================
 
