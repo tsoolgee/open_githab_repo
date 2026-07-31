@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         פתח ריפו/פריסה כאתר מהריפו (עוקף .io חסום)
+// @name         פתח ריפו/פריסה כאתר מהריפו (עוקף .io חסום) - Whitelisted
 // @namespace    tsoolgee
-// @version      0.0.1
-// @description  כפתור בדף ריפו בגיטהאב, וגם בדפי github.io עצמם, שפותח את האתר טעון במלואו מהריפו (דרך raw.githack.com - Content-Type נכון) - בלי לגעת ב-github.io החסום. משתמש ב-GM_xmlhttpRequest כדי לעקוף CSP.
+// @version      0.0.2
+// @description  כפתור בדף ריפו בגיטהאב, וגם בדפי github.io עצמם, שפותח את האתר טעון במלואו מהריפו. עובד רק על משתמשים המוגדרים ברשימה הלבנה.
 // @match        https://github.com/*/*
 // @match        https://*.github.io/*
 // @grant        GM_xmlhttpRequest
@@ -13,6 +13,16 @@
 
 (function () {
     'use strict';
+
+    // ==========================================
+    // WHITELIST: Add the GitHub usernames or organizations here
+    // ==========================================
+    const WHITELIST = [
+        'cfopuser', 
+        'username2',
+        'some-organization'
+    ];
+    // ==========================================
 
     function gmRequest(url, method) {
         return new Promise((resolve, reject) => {
@@ -70,6 +80,16 @@
 
     const target = detectTarget();
     if (!target) return;
+
+    // --- WHITELIST CHECK ---
+    // Check if the detected owner is inside our whitelist (case-insensitive)
+    const isWhitelisted = WHITELIST.some(user => user.toLowerCase() === target.owner.toLowerCase());
+    if (!isWhitelisted) {
+        // If not in whitelist, exit silently without adding the button
+        return; 
+    }
+    // -----------------------
+
     if (document.getElementById('repo-pages-bypass-btn')) return;
 
     const btn = document.createElement('button');
